@@ -1,4 +1,7 @@
 import {fs,chalk,loadBudget} from './imports.js'
+import updateQuatity from './updateQuantity.js';
+import upDatePrice from './updatePrice.js';
+import upDateAll from './updateAll.js';
 
 const updateBudget = (titleToUpdate,quantityToUpdate,priceToUpdate)=>{
  //budget here
@@ -24,22 +27,17 @@ if(quantityToUpdate == undefined && priceToUpdate == undefined){
 }
 else if(quantityToUpdate !=undefined && priceToUpdate == undefined){
   //update quantity
-  budget[indexOfBudget].quantity = quantityToUpdate;
-  fs.writeFileSync("./Data/Budget.json", JSON.stringify(budget));
-  console.log(chalk.bgGreen("Quantity updated successfully"));
+  updateQuatity(quantityToUpdate,indexOfBudget,budget)
+  
 }
 else if(quantityToUpdate == undefined && priceToUpdate != undefined){
   //update price
-  budget[indexOfBudget].price = priceToUpdate;
-  fs.writeFileSync("./Data/Budget.json", JSON.stringify(budget));
-  console.log(chalk.bgGreen("price updated successfully"));
+  upDatePrice(priceToUpdate,budget,indexOfBudget);
 }
 else{
   //modify the content
- budget[indexOfBudget].quantity = quantityToUpdate;
- budget[indexOfBudget].price = priceToUpdate;
- fs.writeFileSync("./Data/Budget.json", JSON.stringify(budget));
- console.log(chalk.bgGreen("Entire budget updated successfully!!"));
+  upDateAll(quantityToUpdate,priceToUpdate,budget,indexOfBudget)
+ 
 }
 
 
